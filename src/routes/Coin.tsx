@@ -6,7 +6,7 @@ import Price from './Price';
 import { useQuery } from 'react-query';
 import { fetchCoinInfo, fetchCoinTickers } from '../api';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilBridgeAcrossReactRoots_UNSTABLE, useRecoilValue, useSetRecoilState } from 'recoil';
 import { isDarkAtom } from '../atoms';
 
 
@@ -151,7 +151,8 @@ const Btn = styled.button`
   height: 30px;
   border-radius: 20%;
   background-color: ${(props) =>
-   isDark ? props.theme.accentColor : props.theme.textColor};
+   isDark ? props.theme.accentColor : 'rgba(0, 0, 0, 0.5)'};
+  color: ${(props)=> isDark ? props.theme.textColor : 'white'};
   display: flex;
   justify-content : center;
   align-items: center;

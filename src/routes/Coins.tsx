@@ -59,13 +59,13 @@ const Btn = styled.button`
   border-radius: 20%;
   background-color: ${(props) =>
     props.theme.accentColor};
-  position : relative;
-  bottom: 45px;
   display: flex;
   justify-content : center;
   align-items: center;
   border : 0px;
   a {padding : 10px};
+  position: absolute;
+  left: 100px;
 `;
 
 interface ICoin {
@@ -92,10 +92,10 @@ function Coins() {
     return (
     <Container>
         <Helmet>
-       <title>Coins!</title>
+       <title>Crypto Tracker</title>
      </Helmet>
         <Header>
-            <Title>Coins!</Title>
+            <Title>Crypto Tracker</Title>
             <Btn onClick={toggleDarkAtom}>{isDark? "Light Mode" : "Dark Mode"}</Btn>
         </Header>
         {isLoading ? <Loader>...Loading</Loader> : <CoinsList>
