@@ -151,9 +151,7 @@ const Btn = styled.button`
   height: 30px;
   border-radius: 20%;
   background-color: ${(props) =>
-    props.theme.accentColor};
-  position : relative;
-  bottom: 45px;
+   isDark ? props.theme.accentColor : props.theme.textColor};
   display: flex;
   justify-content : center;
   align-items: center;
@@ -170,10 +168,7 @@ const isDark = useRecoilValue(isDarkAtom);
 const setDarkAtom = useSetRecoilState(isDarkAtom);
 const toggleDarkAtom = () => setDarkAtom(prev => !prev);
 
-const Mode = styled(Btn)`
-  background-color: ${(props) =>
-    props.theme.accentColor};
-`
+
 
    return (<Container>
      <HelmetProvider>
@@ -184,7 +179,7 @@ const Mode = styled(Btn)`
     <Header>
         <Btn><Link to={'/'}>Back</Link></Btn>
         <Title>{state?.name ? state.name : loading ? "loading..." : infoData?.name}</Title>
-        <Mode onClick={toggleDarkAtom}>{isDark? "Light Mode" : "Dark Mode"}</Mode>
+        <Btn onClick={toggleDarkAtom}>{isDark? "Light Mode" : "Dark Mode"}</Btn>
     </Header>
     {
     loading ? <Loader>...Loading</Loader> : 
