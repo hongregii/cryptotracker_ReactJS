@@ -53,6 +53,20 @@ const Img = styled.img`
     margin: 0px 10px 0 0;
 `;
 
+const Btn = styled.button`
+  width: 40px;
+  height: 30px;
+  border-radius: 20%;
+  background-color: ${(props) =>
+    props.theme.accentColor};
+  position : relative;
+  bottom: 45px;
+  display: flex;
+  justify-content : center;
+  align-items: center;
+  border : 0px;
+  a {padding : 10px};
+`;
 
 interface ICoin {
     "id": string,
@@ -82,7 +96,7 @@ function Coins() {
      </Helmet>
         <Header>
             <Title>Coins!</Title>
-            <button onClick={toggleDarkAtom}>{isDark? "Light Mode" : "Dark Mode"}</button>
+            <Btn onClick={toggleDarkAtom}>{isDark? "Light Mode" : "Dark Mode"}</Btn>
         </Header>
         {isLoading ? <Loader>...Loading</Loader> : <CoinsList>
             {data?.slice(0, 100).map((coin) => <Coin key= {coin.id}>

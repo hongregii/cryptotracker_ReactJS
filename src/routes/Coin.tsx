@@ -6,6 +6,9 @@ import Price from './Price';
 import { useQuery } from 'react-query';
 import { fetchCoinInfo, fetchCoinTickers } from '../api';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { isDarkAtom } from '../atoms';
+
 
 const Container = styled.div`
 padding: 0px 20px;
@@ -17,7 +20,8 @@ const Header = styled.header`
 height: 10vh;
 display: flex;
 align-items:center;
-justify-content: center;
+justify-content: space-between;
+padding: 0 20px;
 `;
 
 const Loader = styled.span`
@@ -157,10 +161,19 @@ const Btn = styled.button`
   a {padding : 10px};
 `; 
 
-  const priceMatch = useMatch("/:coinId/price");
-  const chartMatch = useMatch("/:coinId/chart");
-  const loading = infoLoading || tickersLoading;
 
+
+const priceMatch = useMatch("/:coinId/price");
+const chartMatch = useMatch("/:coinId/chart");
+const loading = infoLoading || tickersLoading;
+const isDark = useRecoilValue(isDarkAtom);
+const setDarkAtom = useSetRecoilState(isDarkAtom);
+const toggleDarkAtom = () => setDarkAtom(prev => !prev);
+
+const Mode = styled(Btn)`
+  background-color: ${(props) =>
+    props.theme.accentColor};
+`
 
    return (<Container>
      <HelmetProvider>
@@ -169,14 +182,15 @@ const Btn = styled.button`
      </Helmet>
      </HelmetProvider>
     <Header>
+        <Btn><Link to={'/'}>Back</Link></Btn>
         <Title>{state?.name ? state.name : loading ? "loading..." : infoData?.name}</Title>
+        <Mode onClick={toggleDarkAtom}>{isDark? "Light Mode" : "Dark Mode"}</Mode>
     </Header>
     {
     loading ? <Loader>...Loading</Loader> : 
     (
         <>
-        <Btn>
-          <Link to={'/'}>Back</Link></Btn>
+        
           <Overview>
             <OverviewItem>
               <span>Rank:</span>

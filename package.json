@@ -56,5 +56,5 @@
     "@types/styled-components": "^5.1.25",
     "gh-pages": "^4.0.0"
   },
-  "homepage": "https://hongregii.github.io/cryptotracker_ReactJS"
+  "homepage": "https://hongregii.github.io/cryptotracker_ReactJS/"
 }
